@@ -14,9 +14,10 @@ app.config['UPLOAD'] = upload
 @app.route('/api/post/image', methods=['POST'])
 def file_upload():
     print("cock")
-    f = request.files['file']
+    iid = request.args.get("iid")
+    f = request.files['image']
     filename = secure_filename(f.filename)
-    f.save(os.path.join(app.config['UPLOAD'], filename))
+    f.save(os.path.join(app.config['UPLOAD'], iid+'.jpg'))
     return send_from_directory(app.config['UPLOAD'], filename)
 
 @app.route("/")
